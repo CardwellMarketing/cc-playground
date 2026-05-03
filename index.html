@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Playground — Cardwell Communications</title>
+  <meta name="description" content="Practical micro-tools for nonprofit and small-business leaders. Experimental prototypes you can try right now." />
+
+  <!-- Prevent search engine indexing — keeps the page hidden from public discovery -->
+  <meta name="robots" content="noindex, nofollow" />
+
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand:        #2563EB;
+      --brand-dark:   #1D4ED8;
+      --brand-light:  #EFF6FF;
+      --accent:       #10B981;
+      --accent-dark:  #059669;
+      --accent-light: #ECFDF5;
+      --neutral-50:   #F8FAFC;
+      --neutral-100:  #F1F5F9;
+      --neutral-200:  #E2E8F0;
+      --neutral-400:  #94A3B8;
+      --neutral-500:  #64748B;
+      --neutral-600:  #475569;
+      --neutral-700:  #334155;
+      --neutral-900:  #0F172A;
+      --radius-sm:    6px;
+      --radius-md:    12px;
+      --radius-lg:    18px;
+      --radius-xl:    24px;
+      --shadow-sm:    0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.04);
+      --shadow-md:    0 4px 14px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
+      --shadow-lg:    0 10px 32px rgba(0,0,0,.10), 0 4px 12px rgba(0,0,0,.06);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--neutral-50);
+      color: var(--neutral-900);
+      line-height: 1.65;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ─── Header ───────────────────────────────────────────────────── */
+    .site-header {
+      background: #fff;
+      border-bottom: 1px solid var(--neutral-200);
+      padding: 0 24px;
+    }
+    .site-header__inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      height: 64px;
+      gap: 12px;
+    }
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      background: var(--brand);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .logo-mark svg {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+    }
+    .logo-text {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--neutral-900);
+      line-height: 1.2;
+    }
+    .logo-text span {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--neutral-500);
+      letter-spacing: 0.02em;
+    }
+    .header-badge {
+      margin-left: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      border: 1px solid #A7F3D0;
+      border-radius: 999px;
+      padding: 4px 12px;
+    }
+    .header-badge::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    /* ─── Hero ─────────────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(140deg, #1E3A8A 0%, #2563EB 55%, #3B82F6 100%);
+      color: #fff;
+      padding: 72px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Subtle grid overlay */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+    .hero__inner {
+      position: relative;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.7);
+      margin-bottom: 18px;
+    }
+    .hero__eyebrow-dot {
+      width: 6px;
+      height: 6px;
+      background: #34D399;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .hero__title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+    .hero__title em {
+      font-style: normal;
+      color: #93C5FD;
+    }
+    .hero__subtitle {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,.85);
+      max-width: 500px;
+      margin: 0 auto 28px;
+      line-height: 1.6;
+    }
+    .hero__note {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 999px;
+      padding: 8px 18px;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,.85);
+      backdrop-filter: blur(4px);
+    }
+    .hero__note svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      opacity: 0.8;
+    }
+
+    /* ─── Main ──────────────────────────────────────────────────────── */
+    .main {
+      flex: 1;
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 56px 20px 72px;
+    }
+
+    /* ─── Section Header ────────────────────────────────────────────── */
+    .section-header {
+      margin-bottom: 36px;
+    }
+    .section-header__label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--brand);
+      margin-bottom: 8px;
+    }
+    .section-header__title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--neutral-900);
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .section-header__body {
+      font-size: 0.95rem;
+      color: var(--neutral-600);
+      max-width: 560px;
+      line-height: 1.65;
+    }
+
+    /* ─── Tool Grid ─────────────────────────────────────────────────── */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    /* ─── Tool Card ─────────────────────────────────────────────────── */
+    .tool-card {
+      background: #fff;
+      border: 1px solid var(--neutral-200);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-md);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+    }
+    .tool-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+    }
+
+    .tool-card__header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .tool-card__icon {
+      width: 46px;
+      height: 46px;
+      border-radius: var(--radius-md);
+      background: var(--brand-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .tool-card__icon svg {
+      width: 22px;
+      height: 22px;
+      fill: var(--brand);
+    }
+    .tool-card__meta {
+      flex: 1;
+      min-width: 0;
+    }
+    .tool-card__number {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--neutral-400);
+      margin-bottom: 3px;
+    }
+    .tool-card__name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--neutral-900);
+      line-height: 1.3;
+    }
+    .tool-card__status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      border: 1px solid #A7F3D0;
+      border-radius: 999px;
+      padding: 3px 9px;
+      margin-top: 5px;
+      width: fit-content;
+    }
+    .tool-card__status::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .tool-card__divider {
+      border: none;
+      border-top: 1px solid var(--neutral-100);
+      margin: 0 0 16px;
+    }
+
+    .tool-card__description {
+      font-size: 0.9rem;
+      color: var(--neutral-600);
+      line-height: 1.65;
+      margin-bottom: 22px;
+      flex: 1;
+    }
+
+    .tool-card__actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* ─── Buttons ───────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      padding: 10px 18px;
+      text-decoration: none;
+      font-family: inherit;
+      line-height: 1;
+      transition: background 0.18s ease, transform 0.15s ease, box-shadow 0.18s ease;
+      white-space: nowrap;
+    }
+    .btn svg {
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+    }
+    .btn-primary {
+      background: var(--brand);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(37,99,235,.22);
+      width: 100%;
+      padding: 12px 18px;
+    }
+    .btn-primary:hover {
+      background: var(--brand-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(37,99,235,.3);
+    }
+    .btn-secondary {
+      background: var(--neutral-100);
+      color: var(--neutral-700);
+      border: 1px solid var(--neutral-200);
+      width: 100%;
+      padding: 10px 18px;
+    }
+    .btn-secondary:hover {
+      background: var(--neutral-200);
+    }
+
+    /* ─── Coming Soon Card ──────────────────────────────────────────── */
+    .tool-card--placeholder {
+      background: var(--neutral-50);
+      border: 1.5px dashed var(--neutral-200);
+      box-shadow: none;
+    }
+    .tool-card--placeholder:hover {
+      transform: none;
+      box-shadow: none;
+    }
+    .placeholder-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: var(--radius-md);
+      background: var(--neutral-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .placeholder-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--neutral-400);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .tool-card--placeholder .tool-card__name {
+      color: var(--neutral-500);
+    }
+    .tool-card--placeholder .tool-card__description {
+      color: var(--neutral-400);
+      font-style: italic;
+    }
+    .coming-soon-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: var(--neutral-100);
+      color: var(--neutral-500);
+      border: 1px solid var(--neutral-200);
+      border-radius: 999px;
+      padding: 3px 9px;
+      margin-top: 5px;
+      width: fit-content;
+    }
+
+    /* ─── Prototype Banner ──────────────────────────────────────────── */
+    .prototype-banner {
+      margin-top: 52px;
+      background: #fff;
+      border: 1px solid var(--neutral-200);
+      border-left: 4px solid var(--brand);
+      border-radius: var(--radius-md);
+      padding: 18px 22px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .prototype-banner__icon {
+      width: 32px;
+      height: 32px;
+      background: var(--brand-light);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .prototype-banner__icon svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--brand);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .prototype-banner__text {
+      font-size: 0.875rem;
+      color: var(--neutral-600);
+      line-height: 1.6;
+    }
+    .prototype-banner__text strong {
+      color: var(--neutral-900);
+      font-weight: 700;
+    }
+
+    /* ─── Footer ────────────────────────────────────────────────────── */
+    .site-footer {
+      background: #fff;
+      border-top: 1px solid var(--neutral-200);
+      padding: 20px 24px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--neutral-400);
+    }
+    .site-footer a {
+      color: var(--brand);
+      text-decoration: none;
+    }
+    .site-footer a:hover { text-decoration: underline; }
+
+    /* ─── Responsive ────────────────────────────────────────────────── */
+    @media (max-width: 520px) {
+      .hero { padding: 52px 16px 60px; }
+      .main { padding: 40px 16px 56px; }
+      .tool-card { padding: 22px 18px; }
+      .header-badge { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── Header ──────────────────────────────────────────────────────── -->
+<header class="site-header">
+  <div class="site-header__inner">
+    <div class="logo-mark">
+      <!-- CC monogram icon -->
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9.5 8a4 4 0 1 0 0 8 4 4 0 0 0 2.83-1.17M14.5 8a4 4 0 1 0 0 8 4 4 0 0 0 2.83-1.17"/>
+      </svg>
+    </div>
+    <div class="logo-text">
+      Cardwell Communications
+      <span>Digital Tools &amp; AI Workflows</span>
+    </div>
+    <div class="header-badge">Playground</div>
+  </div>
+</header>
+
+<!-- ─── Hero ─────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero__inner">
+    <div class="hero__eyebrow">
+      <span class="hero__eyebrow-dot"></span>
+      Cardwell Communications
+    </div>
+    <h1 class="hero__title">The <em>Playground</em></h1>
+    <p class="hero__subtitle">
+      Practical micro-tools for nonprofit and small-business leaders — built to save time, simplify workflows, and make digital tools more accessible.
+    </p>
+    <div class="hero__note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+      These are experimental tools you can try right now — no login required.
+    </div>
+  </div>
+</section>
+
+<!-- ─── Main ──────────────────────────────────────────────────────────── -->
+<main class="main">
+
+  <div class="section-header">
+    <p class="section-header__label">Available Tools</p>
+    <h2 class="section-header__title">Try a tool today</h2>
+    <p class="section-header__body">
+      Each tool below is a working prototype. Pick one, test it with your own campaign or project, and let us know what you think.
+    </p>
+  </div>
+
+  <div class="tools-grid">
+
+    <!-- ── Tool #1: Campaign QR Builder ── -->
+    <div class="tool-card">
+      <div class="tool-card__header">
+        <div class="tool-card__icon">
+          <!-- QR icon -->
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 3h7v7H3V3zm2 2v3h3V5H5zm9-2h7v7h-7V3zm2 2v3h3V5h-3zM3 14h7v7H3v-7zm2 2v3h3v-3H5zm11 0h2v2h-2v-2zm-2-2h2v2h-2v-2zm4 0h2v2h-2v-2zm-4 4h2v2h-2v-2zm4 0h2v2h-2v-2zm-2 2h2v2h-2v-2z"/>
+          </svg>
+        </div>
+        <div class="tool-card__meta">
+          <div class="tool-card__number">Tool #1</div>
+          <div class="tool-card__name">Campaign QR Builder</div>
+          <div class="tool-card__status">Live</div>
+        </div>
+      </div>
+
+      <hr class="tool-card__divider" />
+
+      <p class="tool-card__description">
+        Create a QR code and matching campaign copy for events, donations, volunteer signups, surveys, workshops, and general campaigns — in seconds. Includes a downloadable QR code and ready-to-use social, email, and print copy.
+      </p>
+
+      <div class="tool-card__actions">
+        <a href="https://cardwellmarketing.github.io/campaign-qr-builder/" target="_blank" rel="noopener" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+          Try the Tool
+        </a>
+        <a href="mailto:hello@cardwellcommunications.com?subject=Custom%20Version%20Request%3A%20Campaign%20QR%20Builder&body=Hi%2C%0A%0AI%20tried%20the%20Campaign%20QR%20Builder%20and%20I%27m%20interested%20in%20a%20custom%20version.%0A%0AHere%27s%20what%20I%27m%20looking%20for%3A%0A" class="btn btn-secondary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+          </svg>
+          Request a Custom Version
+        </a>
+      </div>
+    </div>
+
+    <!-- ── Placeholder: More tools coming ── -->
+    <div class="tool-card tool-card--placeholder">
+      <div class="tool-card__header">
+        <div class="placeholder-icon">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>
+          </svg>
+        </div>
+        <div class="tool-card__meta">
+          <div class="tool-card__number">Tool #2</div>
+          <div class="tool-card__name">More tools on the way</div>
+          <div class="coming-soon-badge">Coming Soon</div>
+        </div>
+      </div>
+
+      <hr class="tool-card__divider" />
+
+      <p class="tool-card__description">
+        New tools are being developed based on the workflows and challenges most common among nonprofits, solopreneurs, and small businesses.
+      </p>
+
+      <div class="tool-card__actions">
+        <a href="mailto:hello@cardwellcommunications.com?subject=Tool%20Suggestion%20for%20the%20Playground&body=Hi%2C%0A%0AI%20have%20a%20suggestion%20for%20a%20tool%20that%20would%20help%20my%20work%3A%0A" class="btn btn-secondary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          Suggest a Tool
+        </a>
+      </div>
+    </div>
+
+  </div><!-- /tools-grid -->
+
+  <!-- ── Prototype Note ── -->
+  <div class="prototype-banner">
+    <div class="prototype-banner__icon">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </svg>
+    </div>
+    <p class="prototype-banner__text">
+      <strong>These tools are prototypes.</strong> They are functional and free to use, but may evolve based on user feedback. If something doesn't work as expected, or if you have ideas for improvement, we'd love to hear from you at
+      <a href="mailto:hello@cardwellcommunications.com" style="color:var(--brand);text-decoration:none;font-weight:600;">hello@cardwellcommunications.com</a>.
+    </p>
+  </div>
+
+</main>
+
+<!-- ─── Footer ────────────────────────────────────────────────────────── -->
+<footer class="site-footer">
+  &copy; <span id="year"></span> <strong>Cardwell Communications</strong>.
+  &nbsp;·&nbsp;
+  Tools built for nonprofits, solopreneurs, and small businesses.
+  &nbsp;·&nbsp;
+  <a href="mailto:hello@cardwellcommunications.com">hello@cardwellcommunications.com</a>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
