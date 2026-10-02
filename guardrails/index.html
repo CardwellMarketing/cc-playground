@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agentic Guardrails Guide | Cardwell Communications</title>
+  <meta name="description" content="A practical two-page desk guide for leaders defining AI-agent permissions, approvals, human decision points, access boundaries, and operating evidence.">
+  <meta name="robots" content="index,follow">
+  <style>
+    :root{
+      --ink:#101828;--muted:#475467;--line:#D0D5DD;--paper:#F8FAFC;
+      --card:#FFFFFF;--brand:#133A5E;--brand2:#275D8C;--accent:#A9CFF4;
+    }
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--paper);color:var(--ink);line-height:1.55}
+    .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+    header{padding:28px 0;border-bottom:1px solid var(--line);background:#fff}
+    .brand{font-weight:800;letter-spacing:.02em}.tag{color:var(--muted);font-size:.9rem}
+    main{padding:64px 0 72px}.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:start}
+    .eyebrow{font-size:.78rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--brand2);margin-bottom:14px}
+    h1{font-size:clamp(2.25rem,5vw,4rem);line-height:1.04;letter-spacing:-.04em;margin:0 0 20px}
+    .lede{font-size:1.15rem;color:var(--muted);max-width:700px}
+    .points{display:grid;gap:14px;margin:30px 0 0;padding:0;list-style:none}
+    .points li{display:flex;gap:12px;align-items:flex-start}.dot{width:10px;height:10px;border-radius:50%;background:var(--brand2);margin-top:.5em;flex:0 0 auto}
+    .form-card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px;box-shadow:0 12px 30px rgba(16,24,40,.08)}
+    .form-card h2{margin:0 0 8px;font-size:1.45rem}.form-card p{margin:0 0 20px;color:var(--muted)}
+    label{display:block;font-weight:700;font-size:.9rem;margin:15px 0 7px}
+    input{width:100%;padding:12px 14px;border:1px solid #98A2B3;border-radius:10px;font:inherit;background:#fff}
+    button,.download{width:100%;margin-top:20px;padding:13px 18px;border:0;border-radius:10px;background:var(--brand);color:#fff;font-weight:800;font-size:1rem;cursor:pointer;text-decoration:none;display:inline-flex;justify-content:center;align-items:center}
+    button:hover,.download:hover{background:var(--brand2)}
+    .small{font-size:.8rem;color:#667085;margin-top:12px}.success{display:none;margin-top:18px;padding:16px;border-radius:12px;background:#EEF6FF;border:1px solid #B2DDFF}
+    .success strong{display:block;margin-bottom:4px}.success .download{margin-top:12px}
+    footer{border-top:1px solid var(--line);padding:24px 0 40px;color:#667085;font-size:.85rem}
+    @media(max-width:780px){main{padding-top:42px}.grid{grid-template-columns:1fr;gap:32px}}
+  </style>
+</head>
+<body>
+  <header><div class="wrap"><div class="brand">CARDWELL COMMUNICATIONS</div><div class="tag">We orchestrate intelligence.</div></div></header>
+  <main><div class="wrap"><div class="grid">
+    <section>
+      <div class="eyebrow">Free Practical Field Guide</div>
+      <h1>Before You Give an AI Agent the Keys</h1>
+      <p class="lede">AI agents can edit files, update records, send messages, use tools, and carry work across multiple steps. That creates capacity, but it also creates an authority question: what may the agent do, what requires approval, and how will you know what happened afterward?</p>
+      <ul class="points">
+        <li><span class="dot"></span><span>Define the agent's authority before it acts.</span></li>
+        <li><span class="dot"></span><span>Make permissions explicit for sending, spending, publishing, deleting, and changing records.</span></li>
+        <li><span class="dot"></span><span>Keep clear human decision points without creating approval fatigue.</span></li>
+        <li><span class="dot"></span><span>Treat access and governance as different design decisions.</span></li>
+        <li><span class="dot"></span><span>Keep enough operating evidence to reconstruct what happened.</span></li>
+      </ul>
+    </section>
+
+    <aside class="form-card">
+      <h2>Get the Agentic Guardrails Guide</h2>
+      <p>Enter your name and email. Your two-page desk guide will be available immediately.</p>
+      <form id="leadForm" action="https://formsubmit.co/mark@cardwellcom.com" method="POST" target="submitFrame">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" autocomplete="name" required>
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="email" required>
+        <label for="org">Organization <span style="font-weight:400;color:#667085">(optional)</span></label>
+        <input id="org" name="organization" type="text" autocomplete="organization">
+        <input type="hidden" name="_subject" value="Agentic Guardrails Guide Request">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="source" value="Agentic Guardrails Guide Download">
+        <button type="submit">Get the Guide</button>
+      </form>
+      <iframe name="submitFrame" title="form submission" style="display:none"></iframe>
+      <div id="success" class="success" aria-live="polite">
+        <strong>Your guide is ready.</strong>
+        <span>Open or save the PDF below.</span>
+        <a class="download" href="Cardwell_Agentic_Guardrails_Guide.pdf" target="_blank" rel="noopener">Open the Guide</a>
+      </div>
+      <div class="small">Cardwell Communications will use your information to deliver this resource and may follow up with relevant practical AI guidance. No spam.</div>
+    </aside>
+  </div></div></main>
+  <footer><div class="wrap">Cardwell Communications • cardwellcom.com • mark@cardwellcom.com</div></footer>
+
+  <script>
+    const form = document.getElementById('leadForm');
+    const success = document.getElementById('success');
+    form.addEventListener('submit', function() {
+      setTimeout(() => {
+        success.style.display = 'block';
+        success.scrollIntoView({behavior:'smooth', block:'nearest'});
+        window.open('Cardwell_Agentic_Guardrails_Guide.pdf', '_blank', 'noopener');
+      }, 350);
+    });
+  </script>
+</body>
+</html>
